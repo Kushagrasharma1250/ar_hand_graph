@@ -16,20 +16,22 @@ This project is ready to deploy on multiple platforms. Choose the one that works
    - Set publish directory: `dist`
 6. Deploy automatically on every push to your branch
 
-### Option 2: Manual Deployment with Netlify CLI
+### Step 2: Manual Deployment with Netlify CLI
 
 ```bash
 npm install -g netlify-cli
 netlify deploy --prod
 ```
 
-### Option 3: Drag & Drop Deployment
+### Step 3: Drag & Drop Deployment
 
 1. Build locally: `npm run build`
 2. Visit [netlify.com/drop](https://app.netlify.com/drop)
 3. Drag the `dist` folder to upload
 
-**Note:** The `netlify.toml` file in the root directory contains all the configuration needed.
+**Configuration Note:** The `netlify.toml` file in the root directory contains all the configuration needed.
+
+**Build Failed?** If your Netlify build is failing, see [NETLIFY_TROUBLESHOOTING.md](./NETLIFY_TROUBLESHOOTING.md) for detailed diagnosis and fixes.
 
 ---
 
@@ -121,11 +123,42 @@ To further optimize:
 
 ## Troubleshooting
 
+### Build Fails on Netlify (Exit Code 1 or 2)
+
+**Common causes and solutions:**
+
+1. **Node version mismatch**
+   - Netlify uses Node 16 by default (too old)
+   - Solution: `.nvmrc` file is included to specify Node 18.20.0
+   - Verify in Netlify settings: Site settings → Build & deploy → Environment
+
+2. **npm cache issues**
+   - Clean Netlify cache: Site settings → Build & deploy → Clear cache and redeploy
+   - The netlify.toml uses `npm ci` instead of `npm install` (more reliable)
+
+3. **TypeScript compilation errors on Netlify**
+   - Works locally but fails on Netlify
+   - Try: Rebuild without cache in Netlify dashboard
+   - Check the build logs for specific TypeScript errors
+
+4. **Memory issues**
+   - The project includes large dependencies (MediaPipe, Three.js)
+   - Usually not an issue, but clear cache if you see memory-related errors
+
+**If build still fails:**
+
+1. Check the Netlify build logs (Site settings → Build & deploy → Deploys)
+2. Look for the specific error message
+3. Try deploying with GitHub branch instead of drag-and-drop
+4. Verify package-lock.json is committed to git
+
 ### Build Fails on Deployment Platform
 
 - Ensure Node.js version matches (v18+)
 - Check that `npm install` completes successfully
 - Verify all environment variables are set if required
+- Try `npm ci` instead of `npm install` for CI/CD environments
+
 
 ### Large Bundle Size Warning
 
