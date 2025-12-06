@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { Hands } from '@mediapipe/hands';
-import { Camera } from '@mediapipe/camera_utils';
+import * as HandsModule from '@mediapipe/hands';
+import * as CameraModule from '@mediapipe/camera_utils';
+
+const { Hands } = HandsModule as any;
+const { Camera } = CameraModule as any;
 
 type Props = { onHands: (landmarks: any[]) => void };
 
@@ -10,7 +13,7 @@ export default function Webcam({ onHands }: Props) {
 
   useEffect(() => {
     const hands = new Hands({
-      locateFile: (file) =>
+      locateFile: (file: string) =>
         `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
     hands.setOptions({
@@ -19,7 +22,7 @@ export default function Webcam({ onHands }: Props) {
       minDetectionConfidence: 0.7,
       minTrackingConfidence: 0.7,
     });
-    hands.onResults((res) => {
+    hands.onResults((res: any) => {
       onHands(res.multiHandLandmarks || []);
       const ctx = canvasRef.current?.getContext('2d');
       if (!ctx || !videoRef.current) return;
@@ -32,9 +35,9 @@ export default function Webcam({ onHands }: Props) {
         canvasRef.current!.height
       );
       // Optional: draw landmarks for debug
-      res.multiHandLandmarks?.forEach((lm) => {
+      res.multiHandLandmarks?.forEach((lm: any[]) => {
         ctx.fillStyle = '#00f';
-        lm.forEach((p) => ctx.fillRect(p.x * canvasRef.current!.width, p.y * canvasRef.current!.height, 3, 3));
+        lm.forEach((p: any) => ctx.fillRect(p.x * canvasRef.current!.width, p.y * canvasRef.current!.height, 3, 3));
       });
     });
 
