@@ -1,73 +1,100 @@
-# React + TypeScript + Vite
+# AR Hand Graphs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript + Vite application for hand gesture detection and 3D visualization using MediaPipe.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Real-time hand detection using MediaPipe
+- 3D visualizations with Three.js
+- Gesture recognition (pinch, open palm, point, swipe)
+- WebGL-based rendering
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (v18 or higher)
+- npm or yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+The application will start at `http://localhost:5173`
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview
+
+```bash
+npm run preview
+```
+
+## Deployment
+
+### Netlify Deployment
+
+This project is ready to deploy on Netlify. You can deploy it in several ways:
+
+#### 1. Connect Git Repository (Recommended)
+
+1. Go to [netlify.com](https://netlify.com)
+2. Click "New site from Git"
+3. Choose your Git provider and repository
+4. Netlify will automatically detect the build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+
+#### 2. Manual Deployment
+
+```bash
+npm install -g netlify-cli
+netlify deploy --prod
+```
+
+#### 3. Drag & Drop
+
+1. Build the project: `npm run build`
+2. Go to [netlify.com/drop](https://netlify.com/drop)
+3. Drag the `dist` folder to deploy
+
+## Environment Variables
+
+Currently, no environment variables are required for basic functionality.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ThreeCanvas.tsx    - 3D canvas component
+│   └── Webcam.tsx         - Webcam and hand detection
+├── gestures/
+│   ├── detector.ts        - Gesture detection logic
+│   └── types.ts           - Type definitions
+├── charts/
+│   ├── bar3d.ts          - 3D bar chart
+│   └── graph3d.ts        - 3D graph visualization
+├── services/
+│   ├── dataloader.ts     - Data loading utilities
+│   └── persistence.ts    - Local storage management
+├── state/
+│   └── useStore.ts       - Zustand state management
+└── App.tsx               - Main application component
+```
+
+## License
+
+This project is open source.
