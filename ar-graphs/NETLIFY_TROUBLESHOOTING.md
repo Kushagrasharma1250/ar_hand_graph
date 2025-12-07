@@ -116,6 +116,25 @@ npm run build
 netlify deploy --prod --dir=dist
 ```
 
+## Critical: Netlify UI Override Issue (Most Common Cause!)
+
+**If you see in build logs: "build: commandOrigin: ui"**
+
+This is the problem! Netlify is using UI settings instead of `netlify.toml`. 
+
+**Fix:**
+1. Go to your Netlify site dashboard
+2. Click: Site settings → Build & deploy → Build command
+3. Set it to: `npm ci && npm run build`
+4. Click Save
+5. Go to Deploys → Click "Trigger deploy" → "Deploy site"
+6. Wait for build to complete
+
+**Why this happens:**
+- Netlify stores UI settings that override netlify.toml
+- When you see `commandOrigin: ui`, it means the UI settings are being used
+- Solution: Update the UI settings to match netlify.toml
+
 ## If Still Stuck
 
 1. **Check Netlify Status**: https://www.netlify-status.com/

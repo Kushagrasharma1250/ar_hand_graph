@@ -29,9 +29,14 @@ netlify deploy --prod
 2. Visit [netlify.com/drop](https://app.netlify.com/drop)
 3. Drag the `dist` folder to upload
 
-**Configuration Note:** The `netlify.toml` file in the root directory contains all the configuration needed.
+**Configuration Note:** The `netlify.toml` file contains all settings.
 
-**Build Failed?** If your Netlify build is failing, see [NETLIFY_TROUBLESHOOTING.md](./NETLIFY_TROUBLESHOOTING.md) for detailed diagnosis and fixes.
+⚠️ **IMPORTANT - If build fails:** Netlify UI settings override `netlify.toml`!
+- Go to: Site settings → Build & deploy → Build command  
+- Set to: `npm ci && npm run build`
+- Save and rebuild
+
+See [NETLIFY_TROUBLESHOOTING.md](./NETLIFY_TROUBLESHOOTING.md) for complete troubleshooting guide.
 
 ---
 
