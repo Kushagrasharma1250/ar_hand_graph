@@ -7,6 +7,7 @@
   NODE_VERSION = "20.19.0"
   NODE_ENV = "production"
   CI = "true"
+  NPM_CONFIG_PRODUCTION = "false"
 
 [[redirects]]
   from = "/*"
