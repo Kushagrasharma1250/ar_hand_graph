@@ -1,11 +1,11 @@
 // src/App.tsx
 import { useRef, useState } from 'react';
-import Webcam from r'C:\Users\HP\Documents\GitHub\ar_hand_graph\ar-graphs\src\components\Webcam.tsx';
-import ThreeCanvas from r'C:\Users\HP\Documents\GitHub\ar_hand_graph\ar-graphs\src\components\ThreeCanvas.tsx';
+import Webcam from './components/webcam';
+import ThreeCanvas from './components/ThreeCanvas';
 import { detectPinch, detectOpen, detectPoint, detectSwipe } from './gestures/detector';
-import { createBarChart } from r'C:\Users\HP\Documents\GitHub\ar_hand_graph\ar-graphs\src\charts\bar3d.ts';
-import { createGraph } from r'C:\Users\HP\Documents\GitHub\ar_hand_graph\ar-graphs\src\charts\graph3d.ts';
-import { useStore } from r'C:\Users\HP\Documents\GitHub\ar_hand_graph\ar-graphs\src\state\useStore.ts';
+import { createBarChart } from './charts/bar3d';
+import { createGraph } from './charts/graph3d';
+import { useStore } from './state/useStore';
 
 export default function App() {
   const framesRef = useRef<any[]>([]);
